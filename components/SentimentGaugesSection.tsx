@@ -5,14 +5,8 @@ type SentimentGaugesSectionProps = {
   gauges: SentimentGaugeData[];
 };
 
-function formatEurCompact(value: number): string {
-  if (value >= 1_000_000) {
-    return `${(value / 1_000_000).toFixed(1)}M €`;
-  }
-  if (value >= 1_000) {
-    return `${(value / 1_000).toFixed(0)}K €`;
-  }
-  return `${value.toLocaleString("de-DE")} €`;
+function formatEurFull(value: number): string {
+  return `${Math.round(value).toLocaleString("de-DE")} €`;
 }
 
 function getAccentColor(key: string): string {
@@ -62,7 +56,7 @@ function SentimentCard({ data }: { data: SentimentGaugeData }) {
         <div className="flex items-center justify-between">
           <span className="text-xs text-zinc-500 light:text-zinc-600">Exposure gesamt</span>
           <span className="text-sm font-semibold text-zinc-100 light:text-zinc-900">
-            {formatEurCompact(data.totalExposureEur)}
+            {formatEurFull(data.totalExposureEur)}
           </span>
         </div>
 
@@ -73,7 +67,7 @@ function SentimentCard({ data }: { data: SentimentGaugeData }) {
           }`}>
             <div className="text-xs font-medium uppercase text-emerald-400">Long</div>
             <div className="text-sm font-semibold text-zinc-100 light:text-zinc-900">
-              {formatEurCompact(data.longExposureEur)}
+              {formatEurFull(data.longExposureEur)}
             </div>
           </div>
           <div className={`flex-1 rounded px-3 py-2 text-center ${
@@ -81,7 +75,7 @@ function SentimentCard({ data }: { data: SentimentGaugeData }) {
           }`}>
             <div className="text-xs font-medium uppercase text-red-400">Short</div>
             <div className="text-sm font-semibold text-zinc-100 light:text-zinc-900">
-              {formatEurCompact(data.shortExposureEur)}
+              {formatEurFull(data.shortExposureEur)}
             </div>
           </div>
         </div>
