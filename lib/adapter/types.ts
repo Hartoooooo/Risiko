@@ -144,3 +144,23 @@ export interface AnalyticsAdapter {
     sortBy: "NEWEST" | "LARGEST_EXPOSURE" | "PNL";
   }): Promise<OpenTrade[]>;
 }
+
+// Sentiment Gauges Types
+export type SentimentKey = "gold" | "silver" | "bitcoin";
+
+export type SentimentGaugeData = {
+  key: SentimentKey;
+  label: string; // z.B. "GOLD SENTIMENT"
+  symbol: string; // z.B. "GC=F"
+  longPct: number; // 0..100
+  shortPct: number; // 0..100 (sollte 100-longPct sein)
+  longExposureEur: number; // Summe Notional Long
+  shortExposureEur: number; // Summe Notional Short
+  totalExposureEur: number; // long + short
+  netDirectionLabel: "NET LONG" | "NET SHORT" | "NEUTRAL";
+};
+
+export interface SentimentAdapter {
+  // Liefert die 3 festen Gauges (Gold/Silber/Bitcoin). Später DB/API.
+  getSentimentGauges(): Promise<SentimentGaugeData[]>;
+}
