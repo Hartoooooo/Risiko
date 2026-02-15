@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
+/* Dark/Light Mode: data-theme auf html */
+@custom-variant dark ([data-theme="dark"] &);
+@custom-variant light ([data-theme="light"] &);
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0c0c0e;
+  --foreground: #e5e7eb;
+  --page-bg: #09090b;
+  --panel-bg: #18181b;
+  --border-subtle: rgba(63, 63, 70, 0.6);
+}
+
+[data-theme="light"] {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --page-bg: #f4f4f5;
+  --panel-bg: #ffffff;
+  --border-subtle: rgba(228, 228, 231, 0.8);
 }
 
 @theme inline {
@@ -12,15 +27,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
