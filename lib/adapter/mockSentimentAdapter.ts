@@ -2,7 +2,6 @@ import type { SentimentAdapter, SentimentGaugeData } from "./types";
 
 class MockSentimentAdapter implements SentimentAdapter {
   async getSentimentGauges(): Promise<SentimentGaugeData[]> {
-    // Simuliere realistische Werte für Gold, Silber, Bitcoin
     return [
       {
         key: "gold",
@@ -35,6 +34,39 @@ class MockSentimentAdapter implements SentimentAdapter {
         longExposureEur: 340000,
         shortExposureEur: 96000,
         totalExposureEur: 436000,
+        netDirectionLabel: "NET LONG",
+      },
+      {
+        key: "oil",
+        label: "OIL SENTIMENT",
+        symbol: "CL=F",
+        longPct: 55,
+        shortPct: 45,
+        longExposureEur: 95000,
+        shortExposureEur: 78000,
+        totalExposureEur: 173000,
+        netDirectionLabel: "NET LONG",
+      },
+      {
+        key: "platinum",
+        label: "PLATINUM SENTIMENT",
+        symbol: "PL=F",
+        longPct: 38,
+        shortPct: 62,
+        longExposureEur: 48000,
+        shortExposureEur: 78000,
+        totalExposureEur: 126000,
+        netDirectionLabel: "NET SHORT",
+      },
+      {
+        key: "dax",
+        label: "DAX SENTIMENT",
+        symbol: "^GDAXI",
+        longPct: 72,
+        shortPct: 28,
+        longExposureEur: 210000,
+        shortExposureEur: 82000,
+        totalExposureEur: 292000,
         netDirectionLabel: "NET LONG",
       },
     ];

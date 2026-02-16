@@ -146,7 +146,7 @@ export interface AnalyticsAdapter {
 }
 
 // Sentiment Gauges Types
-export type SentimentKey = "gold" | "silver" | "bitcoin";
+export type SentimentKey = "gold" | "silver" | "bitcoin" | "oil" | "platinum" | "dax";
 
 export type SentimentGaugeData = {
   key: SentimentKey;
@@ -163,4 +163,31 @@ export type SentimentGaugeData = {
 export interface SentimentAdapter {
   // Liefert die 3 festen Gauges (Gold/Silber/Bitcoin). Später DB/API.
   getSentimentGauges(): Promise<SentimentGaugeData[]>;
+}
+
+// Exposure Heatmap Types
+export type HeatmapAssetType = "COMMODITY" | "CRYPTO" | "INDEX";
+export type NetDirection = "NET_LONG" | "NET_SHORT" | "NEUTRAL";
+
+export type ExposureHeatmapTile = {
+  id: string;
+  type: HeatmapAssetType;
+  key: string;
+  label: string;
+  ticker: string;
+  longExposureEur: number;
+  shortExposureEur: number;
+  totalExposureEur: number; // long + short (gross)
+  netExposureEur: number; // long - short (für Richtung)
+  netDirection: NetDirection;
+};
+
+export type ExposureHeatmapData = {
+  tiles: ExposureHeatmapTile[];
+  maxAbsTotalExposureEur: number; // für Opacity-Normalisierung
+  updatedAt: string; // ISO
+};
+
+export interface ExposureHeatmapAdapter {
+  getExposureHeatmap(): Promise<ExposureHeatmapData>;
 }
